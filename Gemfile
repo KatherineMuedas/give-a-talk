@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
-gem 'rails', '4.0.1'
+gem 'rails', '~> 4.0.1' 
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -18,9 +18,11 @@ gem 'pg'
 gem 'puma'
 gem 'rolify'
 gem 'simple_form'
+
 group :development do
   gem "better_errors"
   gem "binding_of_caller", :platforms=>[:mri_19, :mri_20, :rbx]
+  gem "bullet"
   gem "guard"
   gem "guard-bundler"
   gem "guard-livereload"
@@ -37,11 +39,14 @@ group :development do
   gem "rails_layout"
   gem "rb-fsevent", require: false
   gem "ruby_gntp"
+
   gem "xray-rails" # https://github.com/brentd/xray-rails  
 end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
+  gem 'railroady'
+
   gem 'coveralls', require: false
 end
 group :test do

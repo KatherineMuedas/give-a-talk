@@ -1,4 +1,31 @@
-%h3 Home
-- @users.each do |user|
-  %p
-    User: #{link_to user.name, user}
+%h1 Give a Talk
+%h3 The simplest way to organize talks & presentations at events
+- if @users
+  - @users.all.each do |user|
+    %h3
+      My Tags
+    = display_tags(user)  
+    %h3
+      My Organizations (#{user.organizations_count})
+      = user.organizations.inspect
+      = user.organizations.map(&:name)
+    %h4
+      Organization Events
+      = user.organization_events.inspect
+    %h3
+      My events (#{user.events_count})
+      = user.events.inspect
+
+    %h3
+      My organization events (#{user.organization_events.count})
+      = user.organization_events.inspect
+
+    %h3
+      All Events (#{user.all_events.count})
+      = user.all_events.inspect
+      = user.all_events.map(&:name)
+
+    %h3
+      My Talks
+      = user.talks.inspect
+= link_to "Find out more", "#", class: 'button radius'

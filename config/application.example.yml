@@ -3,12 +3,12 @@
 # This file should be listed in .gitignore to keep your settings secret!
 # Each entry sets a local environment variable and overrides ENV variables in the Unix shell.
 # For example, setting:
-# GMAIL_USERNAME: Your_Gmail_Username
-# makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
+# GMAIL_user_name: Your_Gmail_user_name
+# makes 'Your_Gmail_user_name' available as ENV["GMAIL_user_name"]
 
 # Add application configuration variables here, as shown below.
 #
-MANDRILL_USERNAME: Your_Username
+MANDRILL_user_name: Your_user_name
 MANDRILL_API_KEY: Your_API_Key
 ADMIN_NAME: First User
 ADMIN_EMAIL: user@example.com

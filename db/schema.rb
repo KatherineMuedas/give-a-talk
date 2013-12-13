@@ -11,10 +11,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203192937) do
+ActiveRecord::Schema.define(version: 20131213230341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+
+  create_table "attendee_events", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attendee_events", ["event_id"], name: "index_attendee_events_on_event_id", using: :btree
+  add_index "attendee_events", ["user_id"], name: "index_attendee_events_on_user_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.text     "text"
+    t.integer  "reply_to_id"
+    t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "events", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "begins_at"
+    t.datetime "ends_at"
+    t.string   "website"
+    t.integer  "eventable_id"
+    t.string   "eventable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["eventable_id", "eventable_type"], name: "index_events_on_eventable_id_and_eventable_type", using: :btree
+
+  create_table "organizations", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "website"
+    t.text     "about"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "events_count", default: 0
+  end
+
+  add_index "organizations", ["user_id"], name: "index_organizations_on_user_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "name"
@@ -26,6 +76,34 @@ ActiveRecord::Schema.define(version: 20131203192937) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tags", ["taggable_id", "taggable_type"], name: "index_tags_on_taggable_id_and_taggable_type", using: :btree
+
+  create_table "talks", force: true do |t|
+    t.string   "talk_type"
+    t.string   "title"
+    t.text     "description"
+    t.text     "justification"
+    t.string   "video"
+    t.string   "presentation"
+    t.string   "status",        default: "pending"
+    t.hstore   "resources"
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "talks", ["event_id"], name: "index_talks_on_event_id", using: :btree
+  add_index "talks", ["user_id"], name: "index_talks_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -40,7 +118,9 @@ ActiveRecord::Schema.define(version: 20131203192937) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "user_name"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -52,6 +132,8 @@ ActiveRecord::Schema.define(version: 20131203192937) do
     t.integer  "invitation_limit"
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.integer  "organizations_count",    default: 0
+    t.integer  "events_count",           default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
