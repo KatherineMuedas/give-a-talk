@@ -2,7 +2,5 @@
 
 FactoryGirl.define do
   factory :attendee_event do
-    user nil
-    event nil
   end
 end

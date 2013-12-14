@@ -32,7 +32,7 @@ GiveATalk::Application.configure do
     # config.action_mailer.smtp_settings = {
     #   :address   => "smtp.mandrillapp.com",
     #   :port      => 25,
-    #   :user_name => ENV["MANDRILL_user_name"],
+    #   :user_name => ENV["MANDRILL_USERNAME"],
     #   :password  => ENV["MANDRILL_API_KEY"]
     # }
   # Send email in development mode.
@@ -42,18 +42,4 @@ GiveATalk::Application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
 
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.alert = true
-    Bullet.bullet_logger = true
-    Bullet.console = true
-    Bullet.growl = true
-    Bullet.rails_logger = true
-    Bullet.add_footer = true
-    # Bullet.xmpp = { :account  => 'bullets_account@jabber.org',
-    #                 :password => 'bullets_password_for_jabber',
-    #                 :receiver => 'your_account@jabber.org',
-    #                 :show_online_status => true }
-    # Bullet.airbrake = true
-  end
 end

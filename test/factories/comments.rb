@@ -2,9 +2,7 @@
 
 FactoryGirl.define do
   factory :comment do
-    text "MyText"
-    reply_to_id 1
-    user nil
-    commentable nil
+    text { Faker::Lorem.sentence }
   end
+  
 end

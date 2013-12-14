@@ -35,9 +35,6 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.1.4)
-    bullet (4.7.1)
-      activesupport
-      uniform_notifier (>= 1.4.0)
     callsite (0.0.11)
     cancan (1.6.10)
     capybara (2.1.0)
@@ -264,7 +261,6 @@ GEM
     uglifier (2.3.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    uniform_notifier (1.4.0)
     warden (1.2.3)
       rack (>= 1.0)
     xpath (2.0.0)
@@ -279,7 +275,6 @@ PLATFORMS
 DEPENDENCIES
   better_errors
   binding_of_caller
-  bullet
   cancan
   capybara
   coffee-rails (~> 4.0.0)
