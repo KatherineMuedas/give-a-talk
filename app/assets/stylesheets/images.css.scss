@@ -1,0 +1,54 @@
+
+img{
+  &.circle{
+    border-radius: 50%;
+  }
+  &.rounded{
+    border-radius: 10px;
+  }
+  &.border{
+    // border #1
+    padding: 3px;
+    background-color: darken($red, 15%);
+
+    // border #2
+    border-color: $red;
+    border-style: solid;
+    border-width: 10px;
+
+    // border #3
+    box-shadow: 0 0 0 3px darken($red, 20%);;
+  }
+  &.border-small{
+    @extend .border;
+    border-width: 5px;
+  }
+  &.border-large{
+    @extend .border;
+    border-width: 15px;
+  }  
+  &.border-xlarge{
+    @extend .border;
+    border-width: 20px;
+  }    
+}
+.bw{
+  -webkit-filter: grayscale(1);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  -ms-filter: grayscale(100%);
+  -webkit-transition: -webkit-filter 300ms linear;
+  -moz-transition: -moz-filter 300ms linear;
+  -o-transition: -o-filter 300ms linear;
+  -ms-transition: -ms-filter 300ms linear;
+  &.fade{
+    &:hover{
+      -webkit-filter: grayscale(0);
+      -webkit-filter: grayscale(0%);
+      -moz-filter: grayscale(0%);
+      -o-filter: grayscale(0%);
+      -ms-filter: grayscale(0%);
+    }
+  }
+}

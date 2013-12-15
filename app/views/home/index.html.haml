@@ -1,31 +1,61 @@
-%h1 Give a Talk
-%h3 The simplest way to organize talks & presentations at events
-- if @users
-  - @users.all.each do |user|
-    %h3
-      My Tags
-    = display_tags(user)  
-    %h3
-      My Organizations (#{user.organizations_count})
-      = user.organizations.inspect
-      = user.organizations.map(&:name)
-    %h4
-      Organization Events
-      = user.organization_events.inspect
-    %h3
-      My events (#{user.events_count})
-      = user.events.inspect
+- unless user_signed_in?
+  %section
+    .columns.large-6.medium-8.small-12.small-centered.text-center
+      %h1 Give a Talk
+      %ul.speakers{data: {orbit: true, options: "animation:slide; animation_speed:1000; timer_speed: 4000;bullets:false; slide_number: false;  pause_on_hover: false; timer: true"}}
+        %li
+          = image_tag "home/spree.jpg", class: 'circle border bw fade inline'
+          %h3 Create your own events
+        %li
+          = image_tag "home/ben.jpg", class: 'circle border bw fade inline'
+          %h3 Organize & Schedule talks
+        %li
+          = image_tag "home/talking.jpg", class: 'circle border bw fade inline'
+          %h3 Invite others
+      %p.top10= link_to t(:start_now), new_user_registration_path, class: 'button radius'
+- else
+  - if @users
+    - @users.all.each do |user|
+      %section
+        .small-4.columns
+          .panel
+            %h3
+              My Tags
+            = display_tags(user)  
+        .small-4.columns
+          .panel
+            %h3
+              My Organizations (#{user.organizations_count})
+            - user.organizations.map(&:name).each do |org|
+              %p= org  
+        .small-4.columns
+          .panel
+            %h4
+              Organization Events
+            - user.organization_events.each do |oe|
+              %p= oe.name
+        .small-4.columns
+          .panel
+            %h3
+              My events (#{user.events_count})
+            - user.events.each do |event|
+              %p= event.name
+        .small-4.columns
+          .panel
+            %h3
+              My organization events (#{user.organization_events.count})
+              - user.organization_events.each do |event|
+                %p= event.name
+        .small-4.columns
+          .panel
 
-    %h3
-      My organization events (#{user.organization_events.count})
-      = user.organization_events.inspect
-
-    %h3
-      All Events (#{user.all_events.count})
-      = user.all_events.inspect
-      = user.all_events.map(&:name)
-
-    %h3
-      My Talks
-      = user.talks.inspect
-= link_to "Find out more", "#", class: 'button radius'
+            %h3
+              All Events (#{user.all_events.count})
+            - user.all_events.each do |event|
+              %p= event.name
+        .small-4.columns
+          .panel
+            %h3
+              My Talks
+            - user.talks.each do |talk|
+              %p= talk.title  

@@ -42,6 +42,7 @@ group :development do
   gem "xray-rails" # https://github.com/brentd/xray-rails  
 end
 group :development, :test do
+
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'railroady'

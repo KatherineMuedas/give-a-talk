@@ -1,0 +1,44 @@
+@for $i from 0 to 21 {
+  $multiplier: $i * 5;
+  .margin#{$multiplier} {
+    margin: #{$multiplier}px;
+  }
+  .marginhorizontal#{$multiplier} {
+    margin: #{$multiplier}px;
+  }  
+  .pad#{$multiplier} {
+    padding: #{$multiplier}px;
+  }
+  .padhorizontal#{$multiplier} {
+    padding-left: #{$multiplier}px;
+    padding-right: #{$multiplier}px;
+  }
+  .padvertical#{$multiplier} {
+    padding-top: #{$multiplier}px;
+    padding-bottom: #{$multiplier}px;
+  }    
+  .padtop#{$multiplier} {
+    padding-top: #{$multiplier}px;
+  }
+  .padbottom#{$multiplier} {
+    padding-bottom: #{$multiplier}px;
+  }  
+  .top#{$multiplier} {
+    margin-top: #{$multiplier}px;
+  }
+  .left#{$multiplier} {
+    margin-left: #{$multiplier}px;
+  }
+  .right#{$multiplier} {
+    margin-right: #{$multiplier}px;
+  }
+  .bottom#{$multiplier} {
+    margin-bottom: #{$multiplier}px;
+  }
+  .negative#{$multiplier} {
+    margin-top: -#{$multiplier}px !important;
+  }
+  .negativebottom#{$multiplier} {
+    margin-bottom: -#{$multiplier}px !important;
+  }
+}
