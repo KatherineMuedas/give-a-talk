@@ -1,4 +1,6 @@
 GiveATalk::Application.routes.draw do
+  resources :organizations
+
   resources :events
 
   root :to => "home#index"

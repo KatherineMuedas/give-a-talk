@@ -21,14 +21,8 @@
           .panel
             %h3
               My Organizations (#{user.organizations_count})
-            - user.organizations.map(&:name).each do |org|
-              %p= org  
-        .small-4.columns
-          .panel
-            %h4
-              Organization Events
-            - user.organization_events.each do |oe|
-              %p= link_to oe.name, oe
+            - user.organizations.each do |org|
+              %p= link_to org.name, org
         .small-4.columns
           .panel
             %h3
@@ -40,14 +34,14 @@
             %h3
               My organization events (#{user.organization_events.count})
               - user.organization_events.each do |event|
-                %p= event.name
+                %p= link_to event.name, event
         .small-4.columns
           .panel
 
             %h3
               All Events (#{user.all_events.count})
             - user.all_events.each do |event|
-              %p= event.name
+              %p= link_to event.name, event
         .small-4.columns
           .panel
             %h3
