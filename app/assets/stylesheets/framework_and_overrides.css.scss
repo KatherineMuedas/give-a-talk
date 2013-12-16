@@ -1,31 +1,31 @@
+
+@import url(//fonts.googleapis.com/css?family=New+Rocker|Electrolize|Berkshire+Swash);
+
+
 @import "customize_foundation";
 // import the CSS framework
+
 @import "foundation";
+@import "foundation-icons";
 
 .full-width { width: 100%; max-width: 100%; }
 
-// override for the 'Home' navigation link
-.top-bar {
-  -moz-box-shadow: 0 -5px 0px 7px $red;
-  -webkit-box-shadow: 0 -5px 0px 7px $red;
-  box-shadow: 0 -5px 0px 7px $red;
-  margin-top: 5px;  
-  .name {
-    font-size: rem-calc(20);
-    line-height: $topbar-height; 
-    a {
-      font-weight: normal;
-      color: white;
-      padding: 0 15px; 
-    }
-  }
+.top-bar, .tab-bar {
+  -moz-box-shadow: 0 -6px 0px 7px $red;
+  -webkit-box-shadow: 0 -6px 0px 7px $red;
+  box-shadow: 0 -6px 0px 7px $red;
+  margin-top: 6px;  
 }
 
+.left-off-canvas-menu, .right-off-canvas-menu{
+ border-top: 5px $red solid; 
+ border-bottom: 2px $red solid; 
+}
 .label{
   margin-right: 5px;
 }
 
-.alert{
+.alert-box{
   margin-left: -20px;
   margin-right: -20px;
   text-align: center;
@@ -48,5 +48,14 @@
   .orbit-next{
     border-radius: 0 10px 10px 0;
     
+  }
+}
+
+.off-canvas-list{
+  li:hover{
+    background-color: lighten($darkgray, 5%);
+  }
+  li > label{
+    text-align: center;
   }
 }

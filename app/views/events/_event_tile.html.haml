@@ -1,0 +1,19 @@
+.panel
+  %h2= event.name
+  - if event.begins_at || event.ends_at
+    = event_time(event.begins_at, event.ends_at)
+  %p.negative20
+    %i.fi-map
+    Location, going here
+  = display_tags(event)
+  %p.text-justify= event.description
+  %p.margin10.text-center
+    = link_to event, class: 'button primary radius' do
+      %span.large
+        %i.fi-calendar
+        View
+    %br
+    = link_to edit_event_path(event), class: 'button small secondary radius' do
+      %i.fi-pencil
+    = link_to  event, :method => :delete, :data => { :confirm => "Are you sure you want to delete #{event.name}?" }, class: 'button small alert radius' do
+      %i.fi-trash

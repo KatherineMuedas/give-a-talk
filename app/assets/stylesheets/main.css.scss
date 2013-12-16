@@ -7,9 +7,10 @@ body{
 main {
   @extend .small-12;
   @extend .columns;
+  margin-top: 15px;
 }
 
-section {
+section.section {
   @extend .row;
   margin-top: 20px;
 }

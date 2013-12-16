@@ -1,0 +1,32 @@
+%li
+  %label.large= current_user.first_name + ' ' +  current_user.last_name
+%li
+  = link_to "#" do
+    %i.fi-results-demographics
+    My Organizations
+%li
+  = link_to "#" do
+    %i.fi-calendar
+    My Events
+%li
+  = link_to "#" do
+    %i.fi-clipboard-pencil
+    Events I'm attending    
+%li
+  = link_to "#" do
+    / %i.fi-torso-business
+    %i.fi-microphone
+    My Talks        
+%li
+  %label 
+    %i.fi-torso
+    My Account
+%li
+  = link_to edit_user_registration_path do
+    %i.fi-pencil
+    = t(:edit_account)
+%li
+  = link_to  destroy_user_session_path, :method=>'delete' do
+    %i.fi-power
+    = t(:sign_out)
+  

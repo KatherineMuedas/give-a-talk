@@ -7,4 +7,7 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, :alert => exception.message
   end
 
+  def set_current_user
+    @user = set_current_user
+  end
 end

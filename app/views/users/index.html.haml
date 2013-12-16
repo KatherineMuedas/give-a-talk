@@ -1,6 +1,6 @@
 %h3 Users
-.row
-  %table.small-10.small-centered.columns
+%section.section
+  %table.small-12.small-centered.columns
     %thead
       %tr
         %th user_name
@@ -12,7 +12,7 @@
     %tbody
       - @users.each do |user|
         %tr
-          %td= link_to user.name, user
+          %td= link_to user.first_name, user
           %td= user.email
           %td= user.created_at.to_date
           %td= user.roles.first.name.titleize unless user.roles.first.nil?

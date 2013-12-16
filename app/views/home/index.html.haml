@@ -1,5 +1,5 @@
 - unless user_signed_in?
-  %section
+  %section.section
     .columns.large-6.medium-8.small-12.small-centered.text-center
       %h1 Give a Talk
       %ul.speakers{data: {orbit: true, options: "animation:slide; animation_speed:1000; timer_speed: 4000;bullets:false; slide_number: false;  pause_on_hover: false; timer: true"}}
@@ -12,16 +12,11 @@
         %li
           = image_tag "home/talking.jpg", class: 'circle border bw fade inline'
           %h3 Invite others
-      %p.top10= link_to t(:start_now), new_user_registration_path, class: 'button radius'
+      %p.top10= link_to t(:start_now), new_user_registration_path, class: 'button round'
 - else
   - if @users
     - @users.all.each do |user|
-      %section
-        .small-4.columns
-          .panel
-            %h3
-              My Tags
-            = display_tags(user)  
+      %section.section
         .small-4.columns
           .panel
             %h3
@@ -33,13 +28,13 @@
             %h4
               Organization Events
             - user.organization_events.each do |oe|
-              %p= oe.name
+              %p= link_to oe.name, oe
         .small-4.columns
           .panel
             %h3
               My events (#{user.events_count})
             - user.events.each do |event|
-              %p= event.name
+              %p= link_to event.name, event
         .small-4.columns
           .panel
             %h3

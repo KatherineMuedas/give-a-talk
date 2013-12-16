@@ -1,12 +1,19 @@
--# navigation styled for Zurb Foundation 5
--# the syntax for data-topbar may need to change for Zurb Foundation 5
-%nav.top-bar{data: {topbar: true}}
-  %ul.title-area
-    %li.name
-      = link_to t(:site_name), root_path
-    %li.toggle-topbar.menu-icon
-      %a{:href => "#"}
-        %span Menu
-  .top-bar-section
-    %ul
-      = render 'layouts/navigation_links'
+%nav.tab-bar{data: {topbar: true}}
+  %section.left-small
+    %a.left-off-canvas-toggle.menu-icon
+      %span
+  %section.middle.tab-bar-section
+    %h1.text-center.site-title= link_to t(:site_name), main_app.root_path
+  - if user_signed_in?
+    %section.right-small
+      %a.right-off-canvas-toggle
+        %span
+        .text-center
+          %i.fi-torso.larger.blue
+%aside.left-off-canvas-menu
+  %ul.off-canvas-list
+    = render 'layouts/navigation_links'
+- if user_signed_in?
+  %aside.right-off-canvas-menu
+    %ul.off-canvas-list
+      = render 'layouts/user_links'

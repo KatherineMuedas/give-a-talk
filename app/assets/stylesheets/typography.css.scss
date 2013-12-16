@@ -1,6 +1,25 @@
+.new-rocker{font-family: 'New Rocker', cursive;}
+.electrolize{font-family: 'Electrolize', sans-serif;}
+.berkshire-swash{font-family: 'Berkshire Swash', cursive;}
+.site-title{
+  @extend .berkshire-swash;
+}
+h1, h2, h3{
+  @extend .site-title;
+}
 h1{
   color: $red;
 }
 h2, h3{
   color: $blue;
 }
+.huge{ font-size: $h1-font-size; }
+.largest{ font-size: $h2-font-size; }
+.larger{ font-size: $h3-font-size; }
+.large{ font-size: $h4-font-size; }
+.big{ font-size: $h5-font-size; }
+.normal{ font-size: $h6-font-size; }
+
+.red{color: $red; }
+.skyblue{color: $skyblue; }
+.blue{color: $blue; }

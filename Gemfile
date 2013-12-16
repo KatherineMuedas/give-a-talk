@@ -5,6 +5,7 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'cancan'
@@ -12,12 +13,14 @@ gem 'devise'
 gem 'devise_invitable'
 gem 'figaro'
 gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
 gem "font-awesome-rails", '~> 3.0'
 gem 'haml-rails'
 gem 'pg'
 gem 'puma'
 gem 'rolify'
 gem 'simple_form'
+
 
 group :development do
   gem "better_errors"

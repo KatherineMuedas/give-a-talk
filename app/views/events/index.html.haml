@@ -1,0 +1,10 @@
+.right
+  %h3
+    = link_to new_event_path, class: '' do
+      %i.fi-calendar
+      New
+%h1 
+  All Events
+- @events.each do |event|
+  .medium-4.large-3.small-12.columns
+    = render 'events/event_tile', event: event
