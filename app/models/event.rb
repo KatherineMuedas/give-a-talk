@@ -2,6 +2,9 @@ class Event < ActiveRecord::Base
   # name: string, description: text, begins_at: datetime, ends_at: datetime, 
   # website: string, eventable_id: integer, eventable_type: string
 
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+  
   belongs_to :eventable, polymorphic: true, counter_cache: true
   has_many :talks
   has_many :attendee_event

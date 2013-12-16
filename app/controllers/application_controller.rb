@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_current_user
-    @user = set_current_user
+    @user = current_user if current_user
   end
 end

@@ -1,5 +1,9 @@
 class Organization < ActiveRecord::Base
   # user_id: integer, name: string, website: string, about: text
+  
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+  
   belongs_to :user, counter_cache: true
   has_many :events, as: :eventable
   has_many :talks, through: :events

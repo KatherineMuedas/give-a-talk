@@ -2,8 +2,12 @@ class Talk < ActiveRecord::Base
   # talk_type: string, title: string, description: text, status: string, 
   # justification: text, video: string, presentation: string, resources: hstore, 
   # user_id: integer, event_id: integer
+
   STATUSES = [['Pending', 'pending'], ['Accepted', 'accepted'], ['Rejected', 'rejected']]
   TALK_TYPES = [['Lightning', 'lightning'], ['Conference', 'conference'], ['Presentation', 'presentation']]
+
+  extend FriendlyId
+  friendly_id :title, use: :slugged
 
   belongs_to :user
   belongs_to :event
