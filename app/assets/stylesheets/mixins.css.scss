@@ -1,0 +1,6 @@
+@mixin filter-transition{
+  -webkit-transition: -webkit-filter 300ms linear;
+  -moz-transition: -moz-filter 300ms linear;
+  -o-transition: -o-filter 300ms linear;
+  -ms-transition: -ms-filter 300ms linear;  
+}

@@ -1,10 +1,9 @@
-.new-rocker{font-family: 'New Rocker', cursive;}
-.electrolize{font-family: 'Electrolize', sans-serif;}
+@import url(//fonts.googleapis.com/css?family=New+Rocker);
 .berkshire-swash{font-family: 'Berkshire Swash', cursive;}
 .site-title{
   @extend .berkshire-swash;
 }
-h1, h2, h3{
+h1, h2, h3, h4{
   @extend .site-title;
 }
 h1{
@@ -12,6 +11,9 @@ h1{
 }
 h2, h3{
   color: $blue;
+}
+a{
+  color: $skyblue;
 }
 .huge{ font-size: $h1-font-size; }
 .largest{ font-size: $h2-font-size; }
@@ -21,5 +23,6 @@ h2, h3{
 .normal{ font-size: $h6-font-size; }
 
 .red{color: $red; }
+.lighterred{ color: $lighterred;}
 .skyblue{color: $skyblue; }
 .blue{color: $blue; }

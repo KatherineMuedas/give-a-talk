@@ -33,8 +33,8 @@
           .panel
             %h3
               My organization events (#{user.organization_events.count})
-              - user.organization_events.each do |event|
-                %p= link_to event.name, event
+            - user.organization_events.each do |event|
+              %p= link_to event.name, event
         .small-4.columns
           .panel
 

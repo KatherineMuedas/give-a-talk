@@ -1,2 +1,6 @@
 $ ->
-  $(".sitewide.alert-box").delay(6000).animate({ marginTop: "-43px", opacity: 0 }, 1500).hide(1);
+  clearAlert = setTimeout(->
+    $(".sitewide.alert-box").animate({ marginTop: "-43px", opacity: 0 }, 1000).remove(1)
+  , 6000)
+  $(document).on "click", ".sitewide.alert-box a.close",  ->
+    clearTimeout clearAlert

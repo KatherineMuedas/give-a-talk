@@ -38,10 +38,7 @@ img{
   -moz-filter: grayscale(100%);
   -o-filter: grayscale(100%);
   -ms-filter: grayscale(100%);
-  -webkit-transition: -webkit-filter 300ms linear;
-  -moz-transition: -moz-filter 300ms linear;
-  -o-transition: -o-filter 300ms linear;
-  -ms-transition: -ms-filter 300ms linear;
+  @include filter-transition;
   &.fade{
     &:hover{
       -webkit-filter: grayscale(0);

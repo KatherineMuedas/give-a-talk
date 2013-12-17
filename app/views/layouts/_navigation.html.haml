@@ -3,7 +3,11 @@
     %a.left-off-canvas-toggle.menu-icon
       %span
   %section.middle.tab-bar-section
-    %h1.text-center.site-title= link_to t(:site_name), main_app.root_path
+    %h1.text-center.site-title
+      = link_to main_app.root_path do
+        = image_tag('global/logo-thumb.png')
+        = t(:site_name)
+
   - if user_signed_in?
     %section.right-small
       %a.right-off-canvas-toggle

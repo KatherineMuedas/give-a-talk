@@ -2,6 +2,7 @@
   = f.error_notification
 
   .form-inputs
+    = f.input :eventable, as: :select, collection: eventable_collection, include_blank: false, label: t(:event_owner)
     = f.input :name
     = f.input :description
     = f.input :begins_at

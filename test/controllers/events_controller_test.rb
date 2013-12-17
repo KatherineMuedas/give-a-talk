@@ -5,6 +5,7 @@ class EventsControllerTest < ActionController::TestCase
     @user = create(:user)
     @new_event = build(:event, eventable: @user)
     @event = create(:event, eventable: @user)
+    @organization = @user.organizations.create attributes_for(:organization)
     sign_in @user
   end
 
@@ -14,11 +15,26 @@ class EventsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:events)
   end
 
+  test "should get index for an organization" do
+    get :index, organization_id: @organization.id
+    assert_response :success
+    assert_not_nil assigns(:events)
+    assert_not_nil assigns(:organization)
+  end
+
   test "should get new" do
     get :new
+    assert_not_nil assigns(:event)
     assert_response :success
   end
 
+  test "should get new for an organization" do
+    get :new, organization_id: @organization.id
+    assert_response :success
+    assert_not_nil assigns(:event)
+    assert_not_nil assigns(:organization)
+  end
+  
   test "should create event" do
     assert_difference('Event.count') do
       post :create, event: @new_event.attributes
@@ -30,6 +46,7 @@ class EventsControllerTest < ActionController::TestCase
   test "should show event" do
     get :show, id: @event
     assert_response :success
+    assert_not_nil assigns(:event)
   end
 
   test "should get edit" do

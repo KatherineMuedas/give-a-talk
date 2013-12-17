@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
   def set_current_user
     @user = current_user if current_user
   end
+
+  def check_organization
+    @organization = Organization.friendly.find(params[:organization_id]) if params.has_key?(:organization_id)
+  end
 end

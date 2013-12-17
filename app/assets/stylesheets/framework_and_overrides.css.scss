@@ -1,7 +1,3 @@
-
-@import url(//fonts.googleapis.com/css?family=New+Rocker|Electrolize|Berkshire+Swash);
-
-
 @import "customize_foundation";
 // import the CSS framework
 
@@ -14,7 +10,19 @@
   -moz-box-shadow: 0 -6px 0px 7px $red;
   -webkit-box-shadow: 0 -6px 0px 7px $red;
   box-shadow: 0 -6px 0px 7px $red;
-  margin-top: 6px;  
+  margin-top: 6px;
+  .site-title a{
+    color: $red;
+    @include filter-transition;  
+    &:hover{
+      -webkit-filter: brightness(125) ;
+      -webkit-filter: brightness(125%) ;
+      -moz-filter: brightness(125%) ;
+      -o-filter: brightness(125%) ;
+      -ms-filter: brightness(125%) ;
+
+    }
+  }
 }
 
 .left-off-canvas-menu, .right-off-canvas-menu{

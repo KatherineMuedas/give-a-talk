@@ -41,8 +41,9 @@ class UserTest < ActiveSupport::TestCase
     assert_equal @user.all_events, @user.events + @user.organization_events
   end
 
-  it 'displays a full name properly' do
+  it 'displays a full name & name (alias) properly' do
     assert_equal @user.full_name, [@user.first_name, @user.last_name].join(' ')
+    assert_equal @user.name, [@user.first_name, @user.last_name].join(' ')
   end
 
 end

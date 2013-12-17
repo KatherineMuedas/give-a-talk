@@ -1,5 +1,6 @@
 .panel
-  %h2= event.name
+  %h2
+    = link_to event.name, event
   - if event.begins_at || event.ends_at
     = event_time(event.begins_at, event.ends_at)
   %p.negative20

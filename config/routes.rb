@@ -1,8 +1,4 @@
 GiveATalk::Application.routes.draw do
-  resources :organizations
-
-  resources :events
-
   root :to => "home#index"
   devise_for :users, 
     controllers: {
@@ -18,5 +14,9 @@ GiveATalk::Application.routes.draw do
       registration: 'sign-up',
       sign_up: ''
     }
-  resources :users
+  resources :users, :events
+
+  resources :organizations do 
+    resources :events
+  end
 end
