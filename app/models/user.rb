@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   has_many :organization_events, through: :organizations, source: :events
   has_many :attendee_events
   has_many :attending_events, through: :attendee_events, source: :event
-
+  has_many :locations, as: :locateable, dependent: :destroy
   # Combines User Events & Organization Events
   def all_events
     events + organization_events

@@ -1,0 +1,12 @@
+- locations.each do |location|
+  %p{id: "location-#{location.id}"}
+    - if @event.location.try(:parent_location_id) == location.id
+      = link_to set_location_path(location, @event), remote: true, class: 'button tiny' do
+        %i.fi-star
+        Current
+    - else
+      = link_to set_location_path(location, @event), remote: true, class: 'button success tiny' do
+        Set Location
+    = location.address
+    = link_to location, class: 'button tiny alert', method: :delete, remote: true, data: {confirm: "Are you sure you want to delete #{location.name}?"} do
+      %i.fi-trash

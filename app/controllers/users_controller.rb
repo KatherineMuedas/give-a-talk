@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :set_user, only: [:show, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_user, only: [:show, :update, :destroy]
   def index
     authorize! :index, @user, :message => 'Not authorized as an administrator.'
     @users = User.all

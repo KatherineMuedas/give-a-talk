@@ -9,6 +9,7 @@ class Organization < ActiveRecord::Base
   has_many :talks, through: :events
   has_many :attendees, through: :events, source: :attendees
   has_many :tags, as: :taggable, dependent: :destroy
-
+  has_many :locations, as: :locateable, dependent: :destroy
+  
   validates :user, :name, :about, presence: true
 end

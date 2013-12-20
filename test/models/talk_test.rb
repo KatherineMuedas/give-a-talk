@@ -4,6 +4,8 @@ class TalkTest < ActiveSupport::TestCase
   before do
     @user = create(:user)
     @talk = build(:talk, user: @user)
+    @event = create(:event, eventable: @user)
+    @event_talk = @event.talks.create attributes_for(:talk, user: @user)
   end
 
   it 'must belong to a user' do
@@ -55,6 +57,40 @@ class TalkTest < ActiveSupport::TestCase
     assert @talk.errors[:status].present?
   end  
 
+  it 'must inherit default properties from an event & validates' do
+    assert_equal @event_talk.talk_type, @event.talks_type
+    assert_equal @event_talk.duration, @event.talks_duration
+    # let's change the talk type & duration
+    @event_talk.talk_type = 'conference'
+    @event_talk.duration = 30
+    @event_talk.save
+    # should be reset to event talks_type & duration and still pass
+    refute_equal @event_talk.talk_type, 'conference'
+    refute_equal @event_talk.duration, 30
 
+    assert_equal @event_talk.talk_type, @event.talks_type
+    assert_equal @event_talk.duration, @event.talks_duration    
+  end
   
+  it 'cannot submit a new talk to an event if an event submission limit has been met' do
+    @event.update_attributes(talks_submissions_limit: 10)
+    10.times do
+      @event.talks.create(attributes_for(:talk, user: @user))
+    end
+    event_talks_count = @event.talks.count
+    assert_no_difference("Talk.count") do
+      @new_talk = @event.talks.create(attributes_for(:talk, user: @user))
+    end
+    assert @new_talk.errors[:base].present?
+    assert_equal @event.talks_submissions_limit, 10
+  end
+
+  it 'cannot submit a new talk to an event if the event has a submissions end at time that has passed' do
+    @event.update_attributes(submissions_end_at: Time.now - 1.day)
+    assert_no_difference("Talk.count") do
+      @new_talk = @event.talks.create(attributes_for(:talk, user: @user))
+    end
+    assert @new_talk.errors[:base].present?
+  end
+
 end

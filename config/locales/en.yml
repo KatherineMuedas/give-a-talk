@@ -24,3 +24,4 @@ en:
 
 
   event_owner: "Select an owner for the event"
+  length_of_talks: "Length of talks (in minutes)"

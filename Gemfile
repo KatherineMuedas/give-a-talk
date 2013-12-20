@@ -20,6 +20,8 @@ gem 'pg'
 gem 'puma'
 gem 'rolify'
 gem 'simple_form'
+gem 'carmen-rails', '~> 1.0.0', github: 'jim/carmen-rails'
+gem 'biggs'
 gem 'friendly_id', '~> 5.0.0'
 
 group :development do

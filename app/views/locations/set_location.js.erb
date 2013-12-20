@@ -1,0 +1,2 @@
+$(".locations-list").html("<%= escape_javascript( render 'locations/locations_list', locations: @location.parent.locateable.locations.persisted ) %>");
+$(".event-locations").html("<%= escape_javascript( render 'events/locations', event: @event) %>");

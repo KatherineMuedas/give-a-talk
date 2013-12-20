@@ -1,5 +1,4 @@
-%p#notice= notice
-
+= render 'locations/location_modal', new_location: @new_location, locations: @locations
 %p
   %b Name:
   = @event.name
@@ -17,13 +16,51 @@
   = @event.website
 
 %p
-  %b Owner:
+  %b Organizer:
   = link_to @event.eventable do
     - if @event.eventable_type == "User"
       %i.fi-torso
     - elsif @event.eventable_type == "Organization"
       %i.fi-results-demographics
     = @event.eventable.name
-= link_to 'Edit', edit_event_path(@event)
-\|
-= link_to 'Back', events_path
+.event-locations
+  = render 'events/locations', event: @event     
+
+.talks
+  %p 
+    
+    = @event.filled_talks
+    talks accepted
+  %ul
+    - @event.talks.accepted.each do |talk|
+      %li= talk.title
+  %p
+    
+    = @event.talks_submitted
+    talks submitted
+.attendees
+  .status
+    - if @event.attendees.include? current_user
+      = link_to unattend_event_path, method: :post, remote: true, class: 'button small success' do
+        %i.fi-check
+        You're attending.
+        %br
+        %small
+          Click to unattend
+      
+    - else
+      = link_to attend_event_path, method: :post, remote: true, class: 'button small' do
+        %i.fi-calendar
+        Attend Event?
+  %p
+    = pluralize(@event.attendees.count, 'person')
+    is attending this event
+
+  %ul
+    - @event.attendees.each do |attendee|
+      %li= attendee.name
+
+%p    
+  = link_to 'Edit', edit_event_path(@event)
+  \|
+  = link_to 'Back', events_path

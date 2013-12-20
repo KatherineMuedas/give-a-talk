@@ -2,12 +2,15 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :eventable, as: :select, collection: eventable_collection, include_blank: false, label: t(:event_owner)
+    = f.input :eventable, as: :select, collection: eventable_collection, include_blank: false, label: t(:event_owner) unless controller.action_name == 'edit'
     = f.input :name
     = f.input :description
     = f.input :begins_at
     = f.input :ends_at
     = f.input :website
-
+    = f.input :talks_type, as: :select, collection: Talk::TALK_TYPES, include_blank: true
+    = f.input :talks_duration, label: t(:length_of_talks)
+    = f.input :talks_slots
+    = f.input :submissions_end_at
   .form-actions
     = f.button :submit

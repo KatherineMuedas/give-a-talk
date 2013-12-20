@@ -20,4 +20,12 @@ class AttendeeEventTest < ActiveSupport::TestCase
     @attendee_event.save
     assert @attendee_event.errors[:event].present?
   end
+
+  it 'only allows an attendee to rsvp once' do
+    create(:attendee_event, user: @user, event: @event)
+    assert_no_difference("@event.attendees.count") do
+      @attendee_event.save
+    end
+    assert @attendee_event.errors[:base].present?
+  end
 end

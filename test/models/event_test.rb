@@ -6,6 +6,7 @@ class EventTest < ActiveSupport::TestCase
     @user = create(:user)
     @organization = create(:organization, user: @user)
     @event = build(:event, eventable: @user)
+    @created_event = create(:event, eventable: @user)
   end
 
   it 'must belong to a eventable object (user/organization)' do
@@ -46,4 +47,37 @@ class EventTest < ActiveSupport::TestCase
     @event.save
     assert @event.errors[:ends_at].present?
   end
+
+  it 'must have valid talks type' do
+    @event.talks_type = Faker::HipsterIpsum.word
+    assert @event.invalid?
+    @event.save
+    assert @event.errors[:talks_type].present?
+  end
+
+  it 'returns the number of talks submitted' do
+    assert_equal @event.talks_submitted, "#{@event.talks.count.to_s}#{'/'.to_s + @event.talks_submissions_limit.to_s if @event.talks_submissions_limit.present? }"
+  end
+
+  it 'returns the number of filled talks' do
+    assert_equal @event.filled_talks, "#{@event.talks.accepted.count.to_s}#{'/'.to_s + @event.talks_slots.to_s if @event.talks_slots.present?}"
+  end
+
+  it 'adds a user to the attendee list' do
+    assert_difference('@created_event.attendees.count') do
+      @created_event.attend(@user)
+    end
+    assert_includes @created_event.attendees, @user
+  end
+
+  it 'removes a user from the attendee list' do
+    # first attend the event
+    @created_event.attend(@user)
+    # then unattend
+    assert_difference('@created_event.attendees.count', -1) do
+      @created_event.unattend(@user)
+    end
+    refute_includes @created_event.attendees, @user
+  end
+
 end

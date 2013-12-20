@@ -21,6 +21,6 @@ en:
     #       email: 'E-mail.'
     # hints:
     #   defaults:
-    #     user_name: 'User name to sign in.'
+    #     username: 'User name to sign in.'
     #     password: 'No special characters, please.'
 

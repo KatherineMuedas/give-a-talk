@@ -1,0 +1,13 @@
+- if event.location && event.location.address.present?
+  %p
+    %b Location:
+    = simple_format event.location.address
+  %p
+    = link_to "#", "data-reveal-id" => "location-modal",  class: "button tiny success" do
+      Change location       
+- else
+  %h3
+    Your event needs a location!
+  %p
+    = link_to "#", "data-reveal-id" => "location-modal",  class: "button tiny success" do
+      Set location 

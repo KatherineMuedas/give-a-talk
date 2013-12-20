@@ -39,7 +39,7 @@ class EventsControllerTest < ActionController::TestCase
     assert_difference('Event.count') do
       post :create, event: @new_event.attributes
     end
-
+    
     assert_redirected_to event_path(assigns(:event))
   end
 
@@ -64,7 +64,24 @@ class EventsControllerTest < ActionController::TestCase
     assert_difference('Event.count', -1) do
       delete :destroy, id: @event
     end
-
     assert_redirected_to events_path
   end
+
+  test "should allow user to attend event when signed in" do
+    assert_difference('@event.attendees.count') do
+      post :attend, format: :js, id: @event.id
+    end
+    assert_includes @event.attendees, @user
+  end
+
+  test "should allow user to unattend event when signed in" do
+    # first attend the event
+    post :attend, format: :js, id: @event.id
+    # then unattend
+    assert_difference('@event.attendees.count', -1) do
+      post :unattend, format: :js, id: @event.id
+    end
+    refute_includes @event.attendees, @user
+  end
+
 end

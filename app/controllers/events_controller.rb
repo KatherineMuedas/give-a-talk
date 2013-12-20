@@ -1,9 +1,10 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy, :attend, :unattend]
   before_action :set_current_user, only: [ :new, :edit, :create, :update, :destroy]
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :attend, :unattend]
   before_action :check_organization
-  
+  before_action :set_eventable, only: :create 
+   
   def index
     if @organization
       @events= @organization.events
@@ -13,6 +14,8 @@ class EventsController < ApplicationController
   end
 
   def show
+    @locations = @event.eventable.locations
+    @new_location = @event.eventable.locations.new()
   end
 
   def new
@@ -27,15 +30,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    # @organization ||= Organization.friendly.find(event_params[:eventable])
-    if event_params.has_key?('eventable')
-      eventable = JSON.parse(event_params['eventable'])
-      @event = Event.new(event_params.except!('eventable'))
-      @event.eventable_type = eventable.first
-      @event.eventable_id = eventable.last
-    else
-      @event = Event.new(event_params)
-    end
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -67,8 +61,33 @@ class EventsController < ApplicationController
     end
   end
 
+  def attend
+    @event.attend(current_user)
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def unattend
+    @event.unattend(current_user)
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_eventable
+      if event_params.has_key?('eventable')
+        eventable = JSON.parse(event_params['eventable'])
+        @event = Event.new(event_params.except!('eventable'))
+        @event.eventable_type = eventable.first
+        @event.eventable_id = eventable.last
+      else
+        @event = Event.new(event_params)
+      end
+    end
+
     def set_event
       @event = Event.friendly.find(params[:id])
     end

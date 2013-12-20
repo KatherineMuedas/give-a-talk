@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :talk do
-    talk_type           "lightning"
+    talk_type           "presentation"
     title               { Faker::Conference.name }
     description         { Faker::Lorem.paragraph }
     justification       { Faker::HipsterIpsum.paragraph }
@@ -10,5 +10,6 @@ FactoryGirl.define do
     presentation        { Faker::Internet.http_url }
     status              "pending"
     resources           { {github: "http://www.github.com/#{Faker::HipsterIpsum.word}", homepage: Faker::Internet.http_url} }
+    duration            20
   end
 end

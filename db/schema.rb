@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216041523) do
+ActiveRecord::Schema.define(version: 20131220064151) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,11 @@ ActiveRecord::Schema.define(version: 20131216041523) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.string   "talks_type"
+    t.integer  "talks_duration"
+    t.integer  "talks_slots"
+    t.integer  "talks_submissions_limit"
+    t.datetime "submissions_end_at"
   end
 
   add_index "events", ["eventable_id", "eventable_type"], name: "index_events_on_eventable_id_and_eventable_type", using: :btree
@@ -68,6 +73,27 @@ ActiveRecord::Schema.define(version: 20131216041523) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+
+  create_table "locations", force: true do |t|
+    t.string   "name"
+    t.string   "street_address"
+    t.string   "secondary_address"
+    t.string   "city"
+    t.string   "region"
+    t.string   "postal_code"
+    t.string   "country"
+    t.text     "instructions"
+    t.string   "map"
+    t.string   "url"
+    t.integer  "locateable_id"
+    t.string   "locateable_type"
+    t.string   "slug"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "parent_location_id"
+  end
+
+  add_index "locations", ["locateable_id", "locateable_type"], name: "index_locations_on_locateable_id_and_locateable_type", using: :btree
 
   create_table "organizations", force: true do |t|
     t.integer  "user_id"
@@ -118,6 +144,7 @@ ActiveRecord::Schema.define(version: 20131216041523) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "slug"
+    t.integer  "duration"
   end
 
   add_index "talks", ["event_id"], name: "index_talks_on_event_id", using: :btree

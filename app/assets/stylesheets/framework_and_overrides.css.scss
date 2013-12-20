@@ -67,3 +67,11 @@
     text-align: center;
   }
 }
+.tabs{
+  .active a{
+    background: $secondary-color !important;
+  }
+  a{
+    border: 1px $secondary-color solid;
+  }
+}
