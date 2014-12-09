@@ -1,0 +1,10 @@
+#talk-modal.reveal-modal{"data-reveal" => ""}
+  %h2
+    Submit a talk
+    - if @event
+      to
+      = @event.name
+    %small
+      = display_talk_type(@event)
+
+  = render "talks/form", talk: talk

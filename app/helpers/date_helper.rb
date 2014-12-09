@@ -1,6 +1,6 @@
 module DateHelper
   def event_time(begins_at, ends_at=nil)
-    if ends_at
+    if ends_at.present?
       total_seconds = ends_at - begins_at
       seconds = total_seconds % 60
       minutes = (total_seconds / 60) % 60

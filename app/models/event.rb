@@ -19,6 +19,16 @@ class Event < ActiveRecord::Base
   validate :start_must_be_before_end_time
   validates_inclusion_of :talks_type, in: Talk::TALK_TYPES.map(&:last), message: "Must be a valid talk type: #{Talk::TALK_TYPES.map(&:last).join(', ')}", allow_blank: true
 
+  def accepts_talk_submissions?
+    if self.submissions_end_at.present? && Time.now > self.submissions_end_at
+      false
+    elsif self.talks_submissions_limit.present? && self.talks.count > self.talks_submissions_limit
+      false
+    else
+      true
+    end
+  end
+
   def talks_submitted
     "#{self.talks.count.to_s}#{'/'.to_s + self.talks_submissions_limit.to_s if self.talks_submissions_limit.present? }"
   end

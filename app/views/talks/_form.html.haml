@@ -1,0 +1,12 @@
+= simple_form_for talk, url: @event ? event_talks_path(@event) : talks_path, remote: true do |f|
+  = f.error_notification
+  
+  = f.input :title
+  = f.input :description
+  = f.input :justification, label: "Why should we accept your talk?"
+  = f.input :talk_type unless @event
+  = f.input :video
+  = f.input :presentation
+  -# f.input :resources
+  .text-center
+    = f.submit "Submit your talk", class: "button"

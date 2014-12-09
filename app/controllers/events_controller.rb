@@ -16,6 +16,7 @@ class EventsController < ApplicationController
   def show
     @locations = @event.eventable.locations
     @new_location = @event.eventable.locations.new()
+    @new_talk = current_user.talks.new(talk_type: @event.talks_type)
   end
 
   def new
@@ -94,6 +95,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :description, :begins_at, :ends_at, :website, :eventable, :eventable_id, :eventable_type)
+      params.require(:event).permit(:name, :description, :begins_at, :ends_at, :website, :eventable, :eventable_id, :eventable_type, :talks_type, :talks_duration, :talks_slots, :submissions_end_at)
     end
 end

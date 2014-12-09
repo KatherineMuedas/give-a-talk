@@ -16,4 +16,16 @@ module EventsHelper
     end
     collection
   end
+
+  def display_talk_type(event)
+    case event.talks_type
+    when 'lightning'
+      classes = 'fa fa-bolt'
+    when 'presentation'
+      classes = 'fi-microphone'
+    when 'conference'
+      classes = 'fi-projection-screen'
+    end
+    "<i class='#{classes}'></i> #{event.talks_type.titleize}".html_safe
+  end
 end

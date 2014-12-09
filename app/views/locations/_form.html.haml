@@ -1,0 +1,17 @@
+= simple_form_for(location, url: locations_path(event: {id: @event.id}), remote: true) do |f|
+  = f.error_notification
+  = f.input :name, label: "Name of Location", placeholder: "What's the name of your location"
+  = f.label :country
+  = f.country_select :country, priority: %w(US CA JP DE GB )
+  = f.input :street_address, placeholder: "Street address"
+  = f.input :secondary_address, placeholder: "Optional secondary address" 
+  = f.input :city, placeholder: "Enter your City"
+  = f.label :region, label: "State/Region"
+  = render 'locations/region_select', parent_region: f.object.country.present? ? f.object.country : 'US'
+  = f.input :postal_code 
+  = f.input :instructions
+  = f.input :map 
+  = f.input :url
+  = f.input_field :locateable_id, as: :hidden, value: location.locateable.id
+  = f.input_field :locateable_type, as: :hidden, value: location.locateable_type
+  = f.submit "Add Location", class: 'button'

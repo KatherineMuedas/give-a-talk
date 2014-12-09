@@ -1,4 +1,5 @@
 = render 'locations/location_modal', new_location: @new_location, locations: @locations
+= render 'talks/talk_modal', talk: @new_talk
 %p
   %b Name:
   = @event.name
@@ -27,6 +28,8 @@
   = render 'events/locations', event: @event     
 
 .talks
+  %h3
+    = display_talk_type(@event)
   %p 
     
     = @event.filled_talks
@@ -38,6 +41,14 @@
     
     = @event.talks_submitted
     talks submitted
+
+  - if @event.accepts_talk_submissions?
+    %p
+      = link_to "#", "data-reveal-id" => "talk-modal",  class: "button tiny success" do
+        Submit a talk
+  - else
+    %p
+      %strong No longer accepting talk submissions
 .attendees
   .status
     - if @event.attendees.include? current_user

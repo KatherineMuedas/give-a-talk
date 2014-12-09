@@ -3,9 +3,10 @@
     = link_to event.name, event
   - if event.begins_at || event.ends_at
     = event_time(event.begins_at, event.ends_at)
-  %p.negative20
-    %i.fi-map
-    Location, going here
+  - if event.location
+    %p.negative20
+      %i.fi-map
+      = event.location.address
   = display_tags(event)
   %p.text-justify= event.description
   %p.margin10.text-center

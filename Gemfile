@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
-gem 'rails', '~> 4.0.1' 
+ruby '2.1.5'
+gem 'rails', '~> 4.0.1'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -14,7 +14,7 @@ gem 'devise_invitable'
 gem 'figaro'
 gem 'foundation-rails'
 gem 'foundation-icons-sass-rails'
-gem "font-awesome-rails", '~> 3.0'
+gem "font-awesome-rails", '~> 4.0'
 gem 'haml-rails'
 gem 'pg'
 gem 'puma'
@@ -43,8 +43,7 @@ group :development do
   gem "rails_layout"
   gem "rb-fsevent", require: false
   gem "ruby_gntp"
-
-  gem "xray-rails" # https://github.com/brentd/xray-rails  
+  gem "xray-rails" # https://github.com/brentd/xray-rails
 end
 group :development, :test do
 
